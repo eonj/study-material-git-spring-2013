@@ -1,0 +1,186 @@
+\documentclass
+[printout]
+% [handout]
+{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{newcent}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{calc}
+\usetheme{Goettingen}
+\usecolortheme{beaver}
+\title[Git Study Day 3\\Application]{Application of Git}
+\subtitle{CAT\&DOG Git study 2013\\Day 3}
+\author{Eon Jeong}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\setcounter{section}{-1}
+
+\section{Contents}
+
+\begin{frame}{Contents}
+  \tableofcontents
+\end{frame}
+
+\setcounter{section}{0}
+
+\section{Applying patches and forks}
+
+\begin{frame}
+  \sectionpage
+\end{frame}
+
+\begin{frame}{How to compare?}
+  \fontsize{7pt}{9pt}\selectfont
+  \texttt{
+    \begin{tabular}{|r|l}
+      1& \#include \textless stdio.h\textgreater \\
+      2& \\
+      3& int main() \textbraceleft\\
+      4& \ \ \ \ const char format[11] = "Hello \%s!\textbackslash n";\\
+      5& \ \ \ \ char buf[80] = "World";\\
+      6& \ \ \ \ printf(format, buf);\\
+      7& \ \ \ \ return 0;\\
+      8& \textbraceright\\
+      9& \\
+    \end{tabular}
+    \begin{tabular}{|r|l}
+      1& \#include \textless stdio.h\textgreater \\
+      2& \#include \textless time.h\textgreater \\
+      3& \\
+      4& int main() \textbraceleft\\
+      5& \ \ \ \ const char format[11] = "Hello \%s!\textbackslash n";\\
+      6& \ \ \ \ char buf[80];\\
+      7& \ \ \ \ time\_t now = time(NULL);\\
+      8& \ \ \ \ strftime(buf, 20, "\%F \%T", localtime(\&now));\\
+      9& \ \ \ \ printf(format, buf);\\
+      10& \ \ \ \ return 0;\\
+      11& \textbraceright\\
+      12& \\
+    \end{tabular}
+  }
+\end{frame}
+
+\begin{frame}{Diff}
+  \fontsize{7pt}{9pt}\selectfont
+  \texttt{
+    \begin{tabular}{|r|r|l}
+      1& 1& \#include \textless stdio.h\textgreater \\
+      & 2& \#include \textless time.h\textgreater \\
+      2& 3& \\
+      3& 4& int main() \textbraceleft\\
+      4& 5& \ \ \ \ const char format[11] = "Hello \%s!\textbackslash n";\\
+      5&  & \ \ \ \ char buf[80] = "World";\\
+      & 6& \ \ \ \ char buf[80];\\
+      & 7& \ \ \ \ time\_t now = time(NULL);\\
+      & 8& \ \ \ \ strftime(buf, 20, "\%F \%T", localtime(\&now));\\
+      6& 9& \ \ \ \ printf(format, buf);\\
+      7& 10& \ \ \ \ return 0;\\
+      9& 11& \textbraceright\\
+      9& 12& \\
+    \end{tabular}
+  }
+\end{frame}
+
+\begin{frame}{\texttt{diff}}
+  Show line-by-line difference (mininum edit) between commits or workspace.\pause\\
+  \begin{itemize}
+  \item Compare file(s) between commits. (2 or \textit{more})
+  \item - and +, not \textless and \textgreater.
+  \item Display revision ID and adjacent common lines.
+  \end{itemize}\pause
+  We can use \texttt{format-patch} to generate patch file from diff.
+\end{frame}
+
+\begin{frame}{\texttt{remote}}
+  Manage remote tracked repositories.
+  \begin{itemize}
+  \item \texttt{remote add}\\\texttt{remote rename}\\\texttt{remote remove}
+  \item \texttt{remote set-head}\\\texttt{remote set-branches}\\\texttt{remote set-url}
+  \item \texttt{remote prune}\\\texttt{remote update}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\texttt{merge}}
+  Join two or more development histories together.
+  \begin{itemize}
+  \item Use history from their past common revision, if possible.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\texttt{fetch}}
+  Think about pull without merge. Just update references and objects.
+\end{frame}
+
+\section{Maintaining a repository}
+
+\begin{frame}
+  \sectionpage
+\end{frame}
+
+\begin{frame}{\texttt{branch}}
+  List, create, or delete codelines.
+\end{frame}
+
+\begin{frame}{\texttt{tag}}
+  List, create, delete or verify a tag object, GPG-signed.
+\end{frame}
+
+\begin{frame}{\texttt{rebase}}
+  Forward commits to updated stream baseline by differences.
+\end{frame}
+
+\begin{frame}{\texttt{revert}}
+  Revert some commits without stripping them.
+\end{frame}
+
+\section{Other features}
+\begin{frame}
+  \sectionpage
+\end{frame}
+
+\begin{frame}{\texttt{reset}}
+  Transit HEAD to the specified state.
+\end{frame}
+
+\begin{frame}{\texttt{stash}}
+  Temporarily store current changes and clean workspace.
+\end{frame}
+
+\begin{frame}{\texttt{config}}
+  Handle options, for repository or global(user-wide).
+\end{frame}
+
+\begin{frame}{\texttt{.gitignore}}
+  We can specify untracked files by name specs, e.g. for temporary files.
+  \begin{itemize}
+  \item Wildcard(*) can be used.
+  \item Without \texttt{/}, pplied recursively.
+  \item Files already staged are not affected.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{\texttt{.gitmodules}}
+  Some workspace is required to contain other repository \textit{module} inside, e.g. for library use.\\
+  cf. \texttt{submodule}
+\end{frame}
+
+\section{Thanks}
+
+\begin{frame}{Thank you.}
+  \begin{enumerate}
+  \item CAT
+  \item DOG\pause
+  \item ???
+  \item PROFIT!
+  \end{enumerate}
+\end{frame}
+
+\end{document}

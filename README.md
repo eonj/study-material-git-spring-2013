@@ -10,7 +10,9 @@ Author: Uni-
 License
 -------
 
-These study materials are distributed under GNU Free Documentation License
+These study materials are distributed under [CC BY 4.0].
+
+[CC BY 4.0]: https://creativecommons.org/licenses/by/4.0
 
 Downloads
 ---------
